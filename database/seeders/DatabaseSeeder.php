@@ -17,11 +17,15 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Users
-        User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@canagardens.co.ke',
-        ]);
+        // Admin User (Direct creation without dev-dependency Faker)
+        User::firstOrCreate(
+            ['email' => 'admin@canagardens.co.ke'],
+            [
+                'name' => 'Admin User',
+                'password' => bcrypt('CanaAdmin2026!'),
+                'email_verified_at' => now(),
+            ]
+        );
 
         // SiteSetting
         SiteSetting::create([
