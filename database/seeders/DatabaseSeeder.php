@@ -2,16 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\SiteSetting;
-use App\Models\Service;
-use App\Models\FeatureHighlight;
 use App\Models\Activity;
-use App\Models\GalleryItem;
 use App\Models\BlogPost;
+use App\Models\FeatureHighlight;
+use App\Models\GalleryItem;
+use App\Models\Service;
+use App\Models\SiteSetting;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
-use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {

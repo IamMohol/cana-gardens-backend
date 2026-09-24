@@ -26,13 +26,13 @@ class HealthController extends Controller
         $statusCode = ($dbStatus === 'connected') ? 200 : 503;
 
         $response = [
-            'status'          => $dbStatus === 'connected' ? 'ok' : 'degraded',
-            'service'         => config('app.name', 'Cana Gardens API'),
-            'timestamp'       => now()->toIso8601String(),
-            'php_version'     => PHP_VERSION,
+            'status' => $dbStatus === 'connected' ? 'ok' : 'degraded',
+            'service' => config('app.name', 'Cana Gardens API'),
+            'timestamp' => now()->toIso8601String(),
+            'php_version' => PHP_VERSION,
             'laravel_version' => app()->version(),
-            'environment'     => config('app.env', 'production'),
-            'database'        => $dbStatus,
+            'environment' => config('app.env', 'production'),
+            'database' => $dbStatus,
         ];
 
         if ($dbError) {

@@ -23,7 +23,7 @@ class Inquiry extends Model
     ];
 
     protected $casts = [
-        'event_date'       => 'date',
+        'event_date' => 'date',
         'estimated_guests' => 'integer',
     ];
 }

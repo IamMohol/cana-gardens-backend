@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Inquiry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Models\Inquiry;
 
 class ContactApiTest extends TestCase
 {
@@ -28,7 +28,7 @@ class ContactApiTest extends TestCase
                 'database',
             ])
             ->assertJson([
-                'status'   => 'ok',
+                'status' => 'ok',
                 'database' => 'connected',
             ]);
     }
@@ -57,9 +57,9 @@ class ContactApiTest extends TestCase
     public function test_contact_submission_rejects_invalid_email(): void
     {
         $payload = [
-            'name'    => 'Sarah Jenkins',
-            'email'   => 'not-an-email',
-            'phone'   => '+254712345678',
+            'name' => 'Sarah Jenkins',
+            'email' => 'not-an-email',
+            'phone' => '+254712345678',
             'message' => 'We are looking for wedding pricing.',
         ];
 
@@ -75,13 +75,13 @@ class ContactApiTest extends TestCase
     public function test_contact_submission_creates_inquiry_successfully(): void
     {
         $payload = [
-            'name'             => 'Wanjiku Mwangi',
-            'email'            => 'wanjiku@example.com',
-            'phone'            => '+254722000111',
-            'event_type'       => 'wedding',
+            'name' => 'Wanjiku Mwangi',
+            'email' => 'wanjiku@example.com',
+            'phone' => '+254722000111',
+            'event_type' => 'wedding',
             'estimated_guests' => 350,
-            'event_date'       => '2026-11-20',
-            'message'          => 'Inquiring about lawn availability and bridal suite access for 350 guests.',
+            'event_date' => '2026-11-20',
+            'message' => 'Inquiring about lawn availability and bridal suite access for 350 guests.',
         ];
 
         $response = $this->postJson('/api/contact', $payload);
@@ -106,20 +106,20 @@ class ContactApiTest extends TestCase
             ->assertJson([
                 'success' => true,
                 'data' => [
-                    'name'             => 'Wanjiku Mwangi',
-                    'email'            => 'wanjiku@example.com',
-                    'phone'            => '+254722000111',
-                    'event_type'       => 'wedding',
+                    'name' => 'Wanjiku Mwangi',
+                    'email' => 'wanjiku@example.com',
+                    'phone' => '+254722000111',
+                    'event_type' => 'wedding',
                     'estimated_guests' => 350,
-                    'event_date'       => '2026-11-20',
-                    'status'           => 'new',
+                    'event_date' => '2026-11-20',
+                    'status' => 'new',
                 ],
             ]);
 
         $this->assertDatabaseHas('inquiries', [
-            'email'            => 'wanjiku@example.com',
+            'email' => 'wanjiku@example.com',
             'estimated_guests' => 350,
-            'status'           => 'new',
+            'status' => 'new',
         ]);
     }
 
@@ -131,11 +131,11 @@ class ContactApiTest extends TestCase
         $initialCount = Inquiry::count();
 
         $botPayload = [
-            'name'      => 'Spam Bot',
-            'email'     => 'spambot@example.com',
-            'phone'     => '+18005550199',
-            'message'   => 'Buy cheap watches and pills here http://spam.xyz',
-            'website'   => 'http://spam.xyz', // Bot fills hidden field
+            'name' => 'Spam Bot',
+            'email' => 'spambot@example.com',
+            'phone' => '+18005550199',
+            'message' => 'Buy cheap watches and pills here http://spam.xyz',
+            'website' => 'http://spam.xyz', // Bot fills hidden field
             'bot_check' => 'http://spam.xyz',
         ];
 

@@ -1,13 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\HealthController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\Api\HealthController;
-use App\Http\Controllers\Api\ContactController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------

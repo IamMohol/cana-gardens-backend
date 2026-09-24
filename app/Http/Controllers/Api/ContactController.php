@@ -20,7 +20,7 @@ class ContactController extends Controller
 
         // Basic honeypot spam protection:
         // If a hidden bot field is filled, silently return a success response without persisting
-        if (!empty($request->input('website')) || !empty($request->input('bot_check'))) {
+        if (! empty($request->input('website')) || ! empty($request->input('bot_check'))) {
             Log::warning('Spam bot honeypot triggered on contact form', [
                 'ip' => $request->ip(),
                 'user_agent' => $request->userAgent(),
@@ -41,21 +41,21 @@ class ContactController extends Controller
 
         // Persist the inquiry
         $inquiry = Inquiry::create([
-            'name'             => trim($validated['name']),
-            'email'            => strtolower(trim($validated['email'])),
-            'phone'            => trim($validated['phone']),
-            'event_type'       => $validated['event_type'] ?? 'wedding',
+            'name' => trim($validated['name']),
+            'email' => strtolower(trim($validated['email'])),
+            'phone' => trim($validated['phone']),
+            'event_type' => $validated['event_type'] ?? 'wedding',
             'estimated_guests' => $estimatedGuests ? (int) $estimatedGuests : null,
-            'event_date'       => $validated['event_date'] ?? null,
-            'message'          => trim($validated['message']),
-            'status'           => 'new',
-            'ip_address'       => $request->ip(),
-            'user_agent'       => substr((string) $request->userAgent(), 0, 500),
+            'event_date' => $validated['event_date'] ?? null,
+            'message' => trim($validated['message']),
+            'status' => 'new',
+            'ip_address' => $request->ip(),
+            'user_agent' => substr((string) $request->userAgent(), 0, 500),
         ]);
 
         Log::info("New contact inquiry received #{$inquiry->id}", [
-            'name'       => $inquiry->name,
-            'email'      => $inquiry->email,
+            'name' => $inquiry->name,
+            'email' => $inquiry->email,
             'event_type' => $inquiry->event_type,
             'event_date' => $inquiry->event_date,
         ]);
@@ -63,7 +63,7 @@ class ContactController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Thank you for contacting Cana Gardens! We have received your inquiry and our team will get in touch with you shortly.',
-            'data'    => new InquiryResource($inquiry),
+            'data' => new InquiryResource($inquiry),
         ], 201);
     }
 }
